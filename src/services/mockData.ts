@@ -90,7 +90,7 @@ export const getMockDatasetsData = (): IDataset[] => {
             patents_count: 87234,
             classes: 'H01L, A61B, G05B, H04L',
             // подставить реальные данные ниже
-            diagram_src: '/img/testDatasetDiagram.jpg',
+            diagram_src: '/img/clusters/distr.jpg',
             patents_distribution: [
                 { name: 'H01F', count: 6000 },
                 { name: 'H01G', count: 789 },
