@@ -2,7 +2,7 @@ export interface IDoc {
     id: string
     date: string
     filename: string
-    predictions_count: number
+    patents_count: number
     status_code: TStatusCode
     progress?: number
 }
@@ -12,7 +12,12 @@ export interface IDataset {
     date: string
     range: string
     classes: string
-    predictions_count: number
+    patents_count: number
+    patents_distribution: {
+        name: string
+        count: number
+    }[]
+    diagram_src: string
 }
 
 export interface IModel {
@@ -22,7 +27,7 @@ export interface IModel {
     classes: string
     status_code: TStatusCode
     progress?: number
-    predictions_count: number
+    patents_count: number
     // анализ
     clasters_count: number
     cluster_associations: {

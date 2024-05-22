@@ -3,13 +3,7 @@
         <n-button type="primary" @click="createDataset">
             Создать новый набор данных
         </n-button>
-
         <n-data-table :columns="columns" :data="data" :pagination="pagination" :bordered="false" />
-        <!-- <TaskSettingsModal
-        :opened="settingsModalOpened"
-        :id="taskId"
-        @close="settingsModalOpened = false"
-    /> -->
     </n-space>
     <CreateDatasetModal 
         :opened="createModalOpened" 
@@ -20,11 +14,11 @@
         :opened="editModalOpened" 
         @close="editModalOpened = false" 
     />
-    <!-- <TaskStructureModal
-        :opened="viewingStructureModalOpened"
-        :id="taskId"
-        @close="viewingStructureModalOpened = false"
-    /> -->
+    <DatasetAnalysisModal 
+        :dataset="currentDataset"
+        :opened="datasetAnalysisModalOpened" 
+        @close="datasetAnalysisModalOpened = false" 
+    />
 </template>
 
 <script setup lang="ts">
@@ -33,11 +27,10 @@ import { NButton, useMessage, type DataTableColumns, NText, NIcon } from "naive-
 import { type IDataset } from "@/utils/types/uploadingTypes"
 import { getMockDatasetsData } from "@/services/mockData"
 import DatasetsDropdownMenu from "./DatasetsDropdownMenu.vue"
-// import TaskSettingsModal from "@/components/uploading-task/table/modal/TaskSettingsModal.vue"
-// import TaskModal from "./modal/TaskModal.vue"
-// import TaskStructureModal from "./modal/TaskStructureModal.vue"
 import CreateDatasetModal from './CreateDatasetModal.vue'
 import EditDatasetModal from './EditDatasetModal.vue'
+// @ts-ignore
+import DatasetAnalysisModal from './DatasetAnalysisModal.vue'
 
 const data: IDataset[] = getMockDatasetsData()
 const pagination = false as const
@@ -46,7 +39,7 @@ const message = useMessage()
 const currentDataset = ref<IDataset | null>(null)
 const createModalOpened = ref<boolean>(false)
 const editModalOpened = ref<boolean>(false)
-// const viewingStructureModalOpened = ref<boolean>(false)
+const datasetAnalysisModalOpened = ref<boolean>(false)
 
 const createDataset = () => {
     createModalOpened.value = true
@@ -54,19 +47,14 @@ const createDataset = () => {
 
 const handleDropdownSelect = (dataset: IDataset | null, key: string) => {
     switch (key) {
-        // case "create-model": {
-        //     taskId.value = id
-        //     createModalOpened.value = true
-        //     break
-        // }
-        // case "open-structure": {
-        //     taskId.value = id
-        //     viewingStructureModalOpened.value = true
-        //     break
-        // }
         case "edit": {
             currentDataset.value = dataset
             editModalOpened.value = true
+            break
+        }
+        case "analysis": {
+            currentDataset.value = dataset
+            datasetAnalysisModalOpened.value = true
             break
         }
         default:
@@ -91,7 +79,7 @@ const createColumns = (): DataTableColumns<IDataset> => {
         },
         {
             title: "Патенты",
-            key: "predictions_count",
+            key: "patents_count",
         },
         {
             title: "",

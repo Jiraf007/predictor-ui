@@ -100,7 +100,7 @@ const createColumns = (): DataTableColumns<IDoc> => {
         },
         {
             title: "Патенты",
-            key: "predictions_count",
+            key: "patents_count",
         },
         {
             title: "",

@@ -71,7 +71,7 @@ const createColumns = (): DataTableColumns<IModel> => {
         },
         {
             title: "Патенты",
-            key: "predictions_count",
+            key: "patents_count",
         },
         {
             title: "Статус",

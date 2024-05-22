@@ -1,8 +1,8 @@
 <template>
     <n-modal v-model:show="props.opened" :mask-closable="false">
-        <n-card style="width: 800px" title="Анализ прогноза" :bordered="false" size="medium" role="dialog" closable
+        <n-card style="width: 900px" title="Анализ прогноза" :bordered="false" size="medium" role="dialog" closable
             @close="emit('close')" aria-modal="true">
-            <n-grid x-gap="20" y-gap="16" :cols="2">
+            <n-grid x-gap="24" y-gap="16" :cols="2">
                 <n-gi>
                     <n-h5 style="margin: 0; text-align: center; color: #bcbcbc">Модель</n-h5>
                 </n-gi>
@@ -17,12 +17,12 @@
                 </n-gi>
                 <n-gi v-if="!!model">
                     <n-text strong>Ассоциации кластеров:</n-text>
-                    <n-data-table style="max-width: 400px; margin-top: 8px" size="small" :columns="columns"
+                    <n-data-table style="width: 100%; margin-top: 8px" size="small" :columns="columns"
                         :data="model.cluster_associations" :pagination="false" />
                 </n-gi>
                 <n-gi>
                     <n-text strong>Ассоциации кластеров:</n-text>
-                    <n-data-table style="max-width: 400px; margin-top: 8px" size="small" :columns="columns"
+                    <n-data-table style="width: 100%; margin-top: 8px" size="small" :columns="columns"
                         :data="prediction.cluster_associations" :pagination="false" />
                 </n-gi>
                 <n-gi v-if="!!model">
@@ -38,11 +38,11 @@
             <n-divider />
 
             <n-h5>Соответствие кластеров:</n-h5>
-            <n-grid x-gap="20" :cols="3">
+            <n-grid x-gap="20" :cols="2">
                 <n-gi span="1">
                     <img :src="prediction.matrix_src" style="width: 100%"/>
                 </n-gi>
-                <n-gi span="2">
+                <n-gi span="1" style="white-space: pre-line;">
                     {{ prediction.description }}
                 </n-gi>
             </n-grid>
